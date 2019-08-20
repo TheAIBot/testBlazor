@@ -1,5 +1,10 @@
 function setGraph(nodes, edges)
 {
+    console.log(nodes);
+    console.log(edges);
+    nodes = eval(nodes);
+    edges = eval(edges);
+
 	window.graphDiv = cytoscape(
 	{
 		container: document.getElementById('graphDiv'),
@@ -88,8 +93,9 @@ function loadWorkspace(xmlText)
 
 function getWorkspaceAsXml()
 {
-	const xml = Blockly.Xml.workspaceToDom(workspace);
-	return Blockly.Xml.domToText(xml);
+    const xml = Blockly.Xml.workspaceToDom(workspace);
+    //console.log(Blockly.Xml.domToPrettyText(xml));
+    return Blockly.Xml.domToPrettyText(xml);
 }
 
 function openTab(e, tabName) 
@@ -148,8 +154,8 @@ function ShowBlocklyErrors(errorInfo)
 
 function ShowUnexpectedError(unexpectedError)
 {
-	const unexpectedErrorTextDisplay = document.getElementById("errorTextDiv");
-	unexpectedErrorTextDisplay.innerHTML = unexpectedError;
+    const unexpectedErrorTextDisplay = document.getElementById("errorTextDiv");
+    unexpectedErrorTextDisplay.innerHTML = unexpectedError.replace(/</g, "&lt");
 	const unexpectedErrorsDisplay = document.getElementById("showErrors");
 	unexpectedErrorsDisplay.style.display = "block";
 }

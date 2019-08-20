@@ -23,6 +23,7 @@ function getSettings()
 //}
 function setSettings(settings)
 {
+    settings = eval(settings);
 	for(var i = 0; i < settings.length; i++)
 	{
 		const setting = settings[i];

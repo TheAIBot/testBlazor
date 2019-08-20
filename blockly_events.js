@@ -34,17 +34,12 @@ function onWorkspaceChanged(event)
 		return;
 	}
 	
-	if (typeof(webUpdater) != "undefined")
-	{
-		alreadyWaitingForUpdate = true;
-		new Promise(async resolve => 
-		{
-			webUpdater.update(getWorkspaceAsXml());
-			setTimeout(function()
-			{
-				alreadyWaitingForUpdate = false;
-			}, 100);
-		});
-
-	}
+    alreadyWaitingForUpdate = true;
+    DotNet.invokeMethodAsync("BiolyOnTheWeb", "BlocklyUpdated")
+        .then(data =>
+        {
+            setTimeout(function () {
+                alreadyWaitingForUpdate = false;
+            }, 100);
+        });
 }
